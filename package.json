@@ -1,0 +1,7 @@
+{
+  "name": "api-devhouse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jorge Alegretti <jorgeluiz.b.alegretti@gmail.com>",
+  "license": "MIT"
+}
