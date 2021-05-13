@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { podcastRoutes } from "./poscast.routes"
+import { podcastRoutes } from "./podcast.routes"
 
 const router = Router()
 
