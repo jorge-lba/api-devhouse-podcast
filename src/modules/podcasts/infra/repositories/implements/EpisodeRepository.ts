@@ -16,7 +16,29 @@ class EpisodeRepository implements IEpisodeRepository {
     url
   }: IEpisodeDTO): Promise<IEpisodeDTO> {
 
-    const episode = this.repository.create({
+    const episode = await this.repository.create({
+      title,
+      description,
+      members,
+      duration,
+      published_at,
+      thumbnail,
+      url
+    })
+
+    return episode
+  }
+
+  async findOne({
+    title,
+    description,
+    members,
+    duration,
+    published_at,
+    thumbnail,
+    url
+  }: IEpisodeDTO):Promise<IEpisodeDTO | null>{
+    const episode = await this.repository.findOne({
       title,
       description,
       members,
