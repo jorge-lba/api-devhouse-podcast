@@ -7,3 +7,5 @@ interface IEpisodeDTO {
   description: string,
   url: string
 }
+
+export { IEpisodeDTO }
