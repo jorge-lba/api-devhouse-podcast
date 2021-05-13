@@ -9,7 +9,7 @@ interface IEpisodeRepository {
     published_at,
     thumbnail,
     url
-  }: IEpisodeDTO):void
+  }: IEpisodeDTO):Promise<IEpisodeDTO>
 }
 
 export { IEpisodeRepository }
