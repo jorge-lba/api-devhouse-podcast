@@ -29,10 +29,6 @@ class FillEpisodesDatabaseUseCase {
       episode: lastEpisodeInDatabase
     }
 
-    console.log(lastEpisodeInAnchor?.title === lastEpisodeInDatabase?.title)
-    console.log(lastEpisodeInAnchor?.title ,lastEpisodeInDatabase?.title)
-
-
     let numberOfMissingEpisodes = podcast.episodes.findIndex(episode => 
       episode.title === lastEpisodeInDatabase?.title
     ) - 1
