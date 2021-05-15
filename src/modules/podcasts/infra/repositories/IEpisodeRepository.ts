@@ -20,6 +20,8 @@ interface IEpisodeRepository {
     thumbnail,
     url
   }: IEpisodeDTO): Promise<IEpisodeDTO | null> 
+
+  lastEpisode(): Promise<IEpisodeDTO | null>
 }
 
 export { IEpisodeRepository }

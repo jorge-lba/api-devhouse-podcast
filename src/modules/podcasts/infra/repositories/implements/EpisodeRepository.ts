@@ -50,6 +50,14 @@ class EpisodeRepository implements IEpisodeRepository {
 
     return episode
   }
+
+  async lastEpisode():Promise<IEpisodeDTO | null>{
+    const episode = await this.repository.findOne({},{},{sort: {
+      published_at: -1
+    }})
+
+    return episode
+  }
 }
 
 export { EpisodeRepository }

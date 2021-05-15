@@ -120,10 +120,23 @@ interface IPodcastDTO {
       explicit: string,
       duration: string,
       image: string,
-      episodeType: string
+      episodeType: string,
+      members: string
     }
   ]
 }
+
+const getMembers =(value:string) => value
+.replace(/(<([^>]+)>)/gi, "")
+.split('Hosts')[1]
+.replace(':', '')
+.replace('Convidados:', '')
+.replace(/\&nbsp;/g, '')
+.replace(/^\s*\n/gm, '')
+.replace(/,/gm, '')
+.split(/\n/g)
+.filter(member => member)
+.join(', ')
 
 const MapperObjectChannelAnchor = (anchor_object: IObjectAnchor): IPodcastDTO => {
   const channel = anchor_object.rss.channel
@@ -158,7 +171,8 @@ const MapperObjectChannelAnchor = (anchor_object: IObjectAnchor): IPodcastDTO =>
       explicit: data["itunes:explicit"]._text,
       duration: data["itunes:duration"]._text,
       image: data["itunes:image"]._attributes.href,
-      episodeType: data["itunes:episodeType"]._text
+      episodeType: data["itunes:episodeType"]._text,
+      members: getMembers(data.description._cdata)
     })
   )
   
