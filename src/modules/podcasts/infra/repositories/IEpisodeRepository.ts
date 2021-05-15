@@ -10,6 +10,18 @@ interface IEpisodeRepository {
     thumbnail,
     url
   }: IEpisodeDTO):Promise<IEpisodeDTO>
+
+  findOne({
+    title,
+    description,
+    members,
+    duration,
+    published_at,
+    thumbnail,
+    url
+  }: IEpisodeDTO): Promise<IEpisodeDTO | null> 
+
+  lastEpisode(): Promise<IEpisodeDTO | null>
 }
 
 export { IEpisodeRepository }
