@@ -5,7 +5,9 @@
   "author": "Jorge Alegretti <jorgeluiz.b.alegretti@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "export $(cat .env | xargs) && ts-node-dev src/shared/infra/http/server.ts"
+    "dev": "export $(cat .env | xargs) && ts-node-dev src/shared/infra/http/server.ts",
+    "build": "tsc",
+    "start": "node dist/shared/infra/http/server.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
