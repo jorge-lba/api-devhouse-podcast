@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: devhouse
+      ME_CONFIG_BASICAUTH_PASSWORD: MongoExpress2021!
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: MongoDB2021!
+    links:
+      - mongo
+    networks:
+      - mongo-compose-network
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: MongoDB2021!
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/rahmai/Documents/docker/volumes/MongoDB:/data/db
+    networks:
+      - mongo-compose-network
+
+networks: 
+  mongo-compose-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.218.0/24"
+        - subnet: "2001:3984:3989::/64"
