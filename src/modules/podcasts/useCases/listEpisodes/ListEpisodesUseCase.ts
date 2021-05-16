@@ -10,7 +10,7 @@ class ListEpisodesUseCase {
     private episodeRepository: IEpisodeRepository
   ){}
 
-  async execute({ page, itemsByPage }: IRequestDTO){
+  async execute({ page, itemsByPage }: IRequestDTO ){
     const episodes = await this.episodeRepository.list(
       page,
       itemsByPage
