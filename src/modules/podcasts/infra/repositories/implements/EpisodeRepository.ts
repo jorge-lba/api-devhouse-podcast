@@ -58,6 +58,15 @@ class EpisodeRepository implements IEpisodeRepository {
 
     return episode
   }
+
+  async list(page: number = 0, itemsByPage: number = 10): Promise<IEpisodeDTO[]>{
+
+    const episodes = await this.repository.find({}, null, {
+      skip: page,
+      limit: itemsByPage
+    })
+    return episodes
+  }
 }
 
 export { EpisodeRepository }

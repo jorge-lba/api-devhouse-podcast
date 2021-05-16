@@ -22,6 +22,8 @@ interface IEpisodeRepository {
   }: IEpisodeDTO): Promise<IEpisodeDTO | null> 
 
   lastEpisode(): Promise<IEpisodeDTO | null>
+
+  list(page: number, itemsByPage: number): Promise<IEpisodeDTO[]>
 }
 
 export { IEpisodeRepository }
