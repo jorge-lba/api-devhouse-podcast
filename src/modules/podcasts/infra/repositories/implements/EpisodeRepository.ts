@@ -60,10 +60,14 @@ class EpisodeRepository implements IEpisodeRepository {
   }
 
   async list(page: number = 0, itemsByPage: number = 10): Promise<IEpisodeDTO[]>{
+    const skip = itemsByPage * page
 
     const episodes = await this.repository.find({}, null, {
-      skip: page,
-      limit: itemsByPage
+      skip,
+      limit: itemsByPage,
+      sort: {
+        published_at: -1
+      }
     })
     return episodes
   }
