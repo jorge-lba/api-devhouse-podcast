@@ -45,7 +45,7 @@ class FillEpisodesDatabaseUseCase {
         duration:Number(podcast.episodes[i].duration),
         published_at:new Date(podcast.episodes[i].pubDate),
         thumbnail:podcast.episodes[i].image,
-        url:podcast.episodes[i].link
+        url:podcast.episodes[i].enclosure.url
       })
     }
     
