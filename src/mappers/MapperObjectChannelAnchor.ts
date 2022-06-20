@@ -14,11 +14,12 @@ interface IObjectAnchor {
       generator: { _text: string },
       lastBuildDate: { _text: string },
       'atom:link': [
-        { _attributes: {
+        {
+          _attributes: {
             href: string,
-            rel: string, 
+            rel: string,
             type?: string
-          } 
+          }
         }
       ],
       author: { _cdata: string },
@@ -84,7 +85,7 @@ interface IPodcastDTO {
   'atom:link': [] | [
     {
       href: string,
-      rel: string, 
+      rel: string,
       type?: string
     }
   ],
@@ -126,56 +127,56 @@ interface IPodcastDTO {
   ]
 }
 
-const getMembers =(value:string) => value
-.replace(/(<([^>]+)>)/gi, "")
-.split('Hosts')[1]
-.replace(':', '')
-.replace('Convidados:', '')
-.replace(/\&nbsp;/g, '')
-.replace(/^\s*\n/gm, '')
-.replace(/,/gm, '')
-.split(/\n/g)
-.filter(member => member)
-.join(', ')
+const getMembers = (value: string) => value
+  .replace(/(<([^>]+)>)/gi, "")
+  .split('host')[1]
+  .replace(':', '')
+  .replace('Guests:', '')
+  .replace(/\&nbsp;/g, '')
+  .replace(/^\s*\n/gm, '')
+  .replace(/,/gm, '')
+  .split(/\n/g)
+  .filter(member => member)
+  .join(', ')
 
 const MapperObjectChannelAnchor = (anchor_object: IObjectAnchor): IPodcastDTO => {
   const channel = anchor_object.rss.channel
   //@ts-ignore
-  const atomLink:[{
+  const atomLink: [{
     href: string,
-    rel: string, 
+    rel: string,
     type?: string
   }] = []
 
-  for(let attributes of channel["atom:link"]){
+  for (let attributes of channel["atom:link"]) {
     atomLink.push({
       href: attributes._attributes.href,
-      rel: attributes._attributes.rel, 
+      rel: attributes._attributes.rel,
       type: attributes._attributes?.type
     })
   }
 
-  const episodes =channel.item.map( data => ({
-      title: data.title._cdata,
-      description: data.description._cdata,
-      link: data.link._text,
-      guid: data.guid._text,
-      creator: data["dc:creator"]._cdata,
-      pubDate: data.pubDate._text,
-      enclosure: {
-        url: data.enclosure._attributes.url,
-        length: data.enclosure._attributes.length,
-        type: data.enclosure._attributes.type
-      },
-      summary: data["itunes:summary"]._text,
-      explicit: data["itunes:explicit"]._text,
-      duration: data["itunes:duration"]._text,
-      image: data["itunes:image"]._attributes.href,
-      episodeType: data["itunes:episodeType"]._text,
-      members: getMembers(data.description._cdata)
-    })
+  const episodes = channel.item.map(data => ({
+    title: data.title._cdata,
+    description: data.description._cdata,
+    link: data.link._text,
+    guid: data.guid._text,
+    creator: data["dc:creator"]._cdata,
+    pubDate: data.pubDate._text,
+    enclosure: {
+      url: data.enclosure._attributes.url,
+      length: data.enclosure._attributes.length,
+      type: data.enclosure._attributes.type
+    },
+    summary: data["itunes:summary"]._text,
+    explicit: data["itunes:explicit"]._text,
+    duration: data["itunes:duration"]._text,
+    image: data["itunes:image"]._attributes.href,
+    episodeType: data["itunes:episodeType"]._text,
+    members: getMembers(data.description._cdata)
+  })
   )
-  
+
   return {
     title: channel.title._cdata,
     description: channel.description._cdata,
@@ -199,12 +200,12 @@ const MapperObjectChannelAnchor = (anchor_object: IObjectAnchor): IPodcastDTO =>
     },
     explicit: channel["itunes:explicit"]._text,
     category: {
-      _attributes:  channel["itunes:category"]._attributes.text,
+      _attributes: channel["itunes:category"]._attributes.text,
       category: channel["itunes:category"]["itunes:category"]._attributes
     },
     itunesImage: channel["itunes:image"]._attributes.href,
-      //@ts-ignore
-    episodes    
+    //@ts-ignore
+    episodes
   }
 }
 
