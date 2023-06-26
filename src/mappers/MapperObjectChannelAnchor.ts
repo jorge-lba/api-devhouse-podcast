@@ -128,7 +128,7 @@ interface IPodcastDTO {
 
 const getMembers =(value:string) => value
 .replace(/(<([^>]+)>)/gi, "")
-.split('Hosts')[1]
+.split('host')[1]
 .replace(':', '')
 .replace('Convidados:', '')
 .replace(/\&nbsp;/g, '')
